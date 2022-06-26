@@ -1,35 +1,9 @@
 package com.oops.addressbook;
 
+import java.util.Scanner;
+
 public class AddressBook {
-    public static void main(String[] args) {
-        AddressBook addressBook = new AddressBook();
-        addressBook.setFirstName("Dubyala");
-
-        addressBook.setLastName("Sandeep");
-        addressBook.setAddress("Regonda");
-        addressBook.setCity("Warangal");
-        addressBook.setState("Telangana");
-        addressBook.setZip(506348);
-        addressBook.setPhoneNum("8466905807");
-        addressBook.setEmail("svarma852@gmail.com");
-        System.out.println(addressBook.toString());
-    }
     private String firstName;
-
-    @Override
-    public String toString() {
-        return "AddressBook{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zip=" + zip +
-                ", phoneNum='" + phoneNum + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
     private String lastName;
     private String address;
     private String city;
@@ -101,4 +75,41 @@ public class AddressBook {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "AddressBook{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zip +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    public static void main(String[] args) {
+        AddressBook addressBook = new AddressBook();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter First Name : ");
+        addressBook.setFirstName(sc.next());
+        System.out.println("Enter Second Name : ");
+        addressBook.setLastName(sc.next());
+        System.out.println("Enter Address : ");
+        addressBook.setAddress(sc.next());
+        System.out.println("Enter City : ");
+        addressBook.setCity(sc.next());
+        System.out.println("Enter State : ");
+        addressBook.setState(sc.next());
+        System.out.println("Enter Zip : ");
+        addressBook.setZip(sc.nextDouble());
+        System.out.println("Enter Phone Number : ");
+        addressBook.setPhoneNum(sc.next());
+        System.out.println("Enter Email : ");
+        addressBook.setEmail(sc.next());
+        System.out.println(addressBook.toString());
+    }
+
 }
