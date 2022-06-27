@@ -8,7 +8,7 @@ public class AddressBook {
     private String address;
     private String city;
     private String state;
-    private double zip;
+    private Long zip;
     private String phoneNum;
     private String email;
 
@@ -52,11 +52,11 @@ public class AddressBook {
         this.state = state;
     }
 
-    public double getZip() {
+    public Long getZip() {
         return zip;
     }
 
-    public void setZip(double zip) {
+    public void setZip(Long zip) {
         this.zip = zip;
     }
 
@@ -95,7 +95,7 @@ public class AddressBook {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter First Name : ");
         addressBook.setFirstName(sc.next());
-        System.out.println("Enter Second Name : ");
+        System.out.println("Enter Last Name : ");
         addressBook.setLastName(sc.next());
         System.out.println("Enter Address : ");
         addressBook.setAddress(sc.next());
@@ -104,12 +104,11 @@ public class AddressBook {
         System.out.println("Enter State : ");
         addressBook.setState(sc.next());
         System.out.println("Enter Zip : ");
-        addressBook.setZip(sc.nextDouble());
+        addressBook.setZip(sc.nextLong());
         System.out.println("Enter Phone Number : ");
         addressBook.setPhoneNum(sc.next());
         System.out.println("Enter Email : ");
         addressBook.setEmail(sc.next());
         System.out.println(addressBook.toString());
     }
-
 }
