@@ -47,9 +47,9 @@ public class EditContact {
     public static void choices() {
 
         int choice = 0;
-        while (choice<4) {
+        while (choice<5) {
             Scanner sc  = new Scanner(System.in);
-            System.out.println("Enter ur choice \n1.Add\n2.edit\n3.display\n4.Exit");
+            System.out.println("Enter ur choice \n1.Add\n2.edit\n3.delete\n4.display\n5.Exit");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -60,16 +60,32 @@ public class EditContact {
                     editContcat();
                     break;
                 case 3:
+                    deleteContact();
+                    break;
+                case 4:
                     System.out.println("The entered person details display:");
                     System.out.println(personList.toString());
                     break;
-                case 4:
+                case 5:
                     System.out.println("Enter correct option");
                     break;
                 default:
                     System.out.println("Exit");
             }
         }
+    }
+
+    private static void deleteContact() {
+        System.out.println("Enter the first name of the contact to be deleted: ");
+        String firstName = sc.next();
+        for (int i = 0; i < personList.size(); i++) {
+            if (personList.get(i).getFirstName().equals(firstName)) {
+                personList.remove(personList.get(i));
+                System.out.println("Contact removed successfully");
+            }
+            else
+                System.out.println("Contact not found");
+            }
     }
 
     private static void editContcat() {
