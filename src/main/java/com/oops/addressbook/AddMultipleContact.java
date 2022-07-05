@@ -3,7 +3,7 @@ package com.oops.addressbook;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class EditContact {
+public class AddMultipleContact {
     static ArrayList<AddressBook> personList = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
     static int counter;
@@ -47,9 +47,9 @@ public class EditContact {
     public static void choices() {
 
         int choice = 0;
-        while (choice<5) {
+        while (choice<6) {
             Scanner sc  = new Scanner(System.in);
-            System.out.println("Enter ur choice \n1.Add\n2.edit\n3.delete\n4.display\n5.Exit");
+            System.out.println("Enter ur choice \n1.Add\n2.edit\n3.delete\n4.display\n5.addNoOfContacts\n6.Exit");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -67,11 +67,22 @@ public class EditContact {
                     System.out.println(personList.toString());
                     break;
                 case 5:
+                    addMultipleContact();
+                    break;
+                case 6:
                     System.out.println("Enter correct option");
                     break;
                 default:
                     System.out.println("Exit");
             }
+        }
+    }
+
+    private static void addMultipleContact() {
+        System.out.println("Enter No of persons you want to add in address Book : ");
+        int noOfpersons = sc.nextInt();
+        for (int i = 0; i < noOfpersons; i++) {
+            addContact();
         }
     }
 
@@ -85,7 +96,7 @@ public class EditContact {
             }
             else
                 System.out.println("Contact not found");
-            }
+        }
     }
 
     private static void editContcat() {
