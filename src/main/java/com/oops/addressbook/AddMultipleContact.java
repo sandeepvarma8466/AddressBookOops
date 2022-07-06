@@ -2,14 +2,18 @@ package com.oops.addressbook;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.*;
 
 public class AddMultipleContact {
     static ArrayList<AddressBook> personList = new ArrayList<>();
+    static AddressBook person = new AddressBook();
     static Scanner sc = new Scanner(System.in);
+
+
     static int counter;
 
     public static void addContact() {
-        AddressBook person = new AddressBook();
+
 
         System.out.println("add person details");
         Scanner sc = new Scanner(System.in);
@@ -48,8 +52,9 @@ public class AddMultipleContact {
 
         int choice = 0;
         while (choice<6) {
-            Scanner sc  = new Scanner(System.in);
-            System.out.println("Enter ur choice \n1.Add\n2.edit\n3.delete\n4.display\n5.addNoOfContacts\n6.Exit");
+            /*System.out.println("Enter name of the address book you want to create");
+            String name = sc.next();*/
+            System.out.println("Enter ur choice \n1.Add\n2.edit\n3.delete\n4.addNoOfContactsn\n5.display\n6.addAddressBook\n7.Exit");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -63,18 +68,22 @@ public class AddMultipleContact {
                     deleteContact();
                     break;
                 case 4:
+                    addMultipleContact();
+                    break;
+                case 5:
                     System.out.println("The entered person details display:");
                     System.out.println(personList.toString());
                     break;
-                case 5:
-                    addMultipleContact();
-                    break;
                 case 6:
+                    addAddressBook();
+                    break;
+                case 7:
                     System.out.println("Enter correct option");
                     break;
                 default:
                     System.out.println("Exit");
             }
+            System.out.println("Enter 1 if you want to continue");
         }
     }
 
@@ -139,6 +148,16 @@ public class AddMultipleContact {
                 System.out.println("Contact could not be found");
             }
         }
+    }
+    public static void addAddressBook() {
+        Dictionary address = new Hashtable();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter name of address Book you want: ");
+        AddressBook addressBookMain = new AddressBook();
+        String bookName = scanner.nextLine();
+        address.put(bookName,addressBookMain);
+        System.out.println("Address Book " +bookName+ " has been created.");
+        choices();
     }
 
     public static void main(String[] args) {
