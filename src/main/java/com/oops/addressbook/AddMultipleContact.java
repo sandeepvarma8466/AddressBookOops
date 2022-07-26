@@ -168,15 +168,39 @@ public class AddMultipleContact {
         }
     }
 
+    public int countPersonsByState(String state) {
+        int count= 0;
+        ArrayList<AddressBook> list = (ArrayList<AddressBook>)personList.stream().filter(contactName ->
+                        contactName.getState().equals(state)).collect(Collectors.toList());
+        for (AddressBook contact : list) {
+            System.out.println("Name: " + contact.getFirstName()+ "  " + contact.getLastName());
+            count ++;
+        }
+        return count;
+    }
+
+    public int countPersonsByCity(String city) {
+        int count = 0 ;
+        ArrayList<AddressBook> list = (ArrayList<AddressBook>) personList.stream().filter(contactName
+                        -> contactName.getCity().equals(city)).collect(Collectors.toList());
+        for (AddressBook contact : list) {
+            System.out.println("Name: " + contact.getFirstName()+ "  " + contact.getLastName());
+            count +=1;
+        }
+        return count;
+    }
+
     public static void choices() {
+        AddMultipleContact contact = new AddMultipleContact();
 
         int choice = 0;
-        while (choice < 12) {
+        while (choice < 14) {
             /*System.out.println("Enter name of the address book you want to create");
             String name = sc.next();*/
             System.out.println("Enter ur choice \n1.Add\n2.edit\n3.delete\n4.addNoOfContactsn\n5.display" +
                     "\n6.display details by using state\n7.dispaly details by using city\n8.view person by state" +
-                    "\n9.view person by city\n10.addAddressBook\n11.Exit");
+                    "\n9.view person by city\n10.count person by city\n11.count person by state" +
+                    "\n12.addAddressBook\n13.Exit");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -217,9 +241,21 @@ public class AddMultipleContact {
                     viewPersonByCity(city1);
                     break;
                 case 10:
-                    addAddressBook();
+                    System.out.println("\nEnter the city name to find person in city :- ");
+                    String city3 = sc.next();
+                    int count = contact.countPersonsByCity(city3);
+                    System.out.println("Number of persons by city "+city3+" is "+count);
                     break;
                 case 11:
+                    System.out.println("\nEnter the state name to find person in state  :- ");
+                    String state3 = sc.next();
+                    int count1 = contact.countPersonsByState(state3);
+                    System.out.println("Number of persons by state "+state3+" is "+count1);
+                    break;
+                case 12:
+                    addAddressBook();
+                    break;
+                case 13:
                     System.out.println("Enter correct option");
                     break;
                 default:
