@@ -151,14 +151,32 @@ public class AddMultipleContact {
         }
     }
 
+    public static void viewPersonByState(String state) {
+        ArrayList<AddressBook> list = (ArrayList<AddressBook>) personList.stream().filter(contactName ->
+                        contactName.getState().equals(state)).collect(Collectors.toList());
+        for (AddressBook contact : list) {
+            System.out.println("Name: " + contact.getFirstName() +" "+ contact.getLastName());
+            System.out.println("State: " + state);
+        }
+    }
+    public static void viewPersonByCity(String city) {
+        ArrayList<AddressBook> list = (ArrayList<AddressBook>) personList.stream().filter(contactName ->
+                contactName.getCity().equals(city)).collect(Collectors.toList());
+        for (AddressBook contact : list) {
+            System.out.println("Name: " + contact.getFirstName() +" "+ contact.getLastName());
+            System.out.println("City: " + city);
+        }
+    }
+
     public static void choices() {
 
         int choice = 0;
-        while (choice < 10) {
+        while (choice < 12) {
             /*System.out.println("Enter name of the address book you want to create");
             String name = sc.next();*/
             System.out.println("Enter ur choice \n1.Add\n2.edit\n3.delete\n4.addNoOfContactsn\n5.display" +
-                    "\n6.display details by using state\n7.dispaly details by using city\n8.addAddressBook\n9.Exit");
+                    "\n6.display details by using state\n7.dispaly details by using city\n8.view person by state" +
+                    "\n9.view person by city\n10.addAddressBook\n11.Exit");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -189,9 +207,19 @@ public class AddMultipleContact {
                     System.out.println(personList.toString());
                     break;
                 case 8:
-                    addAddressBook();
+                    System.out.println("\nEnter the state name :- ");
+                    String state1 = sc.next();
+                    viewPersonByState(state1);
                     break;
                 case 9:
+                    System.out.println("Enter the city name :- ");
+                    String city1 = sc.next();
+                    viewPersonByCity(city1);
+                    break;
+                case 10:
+                    addAddressBook();
+                    break;
+                case 11:
                     System.out.println("Enter correct option");
                     break;
                 default:
