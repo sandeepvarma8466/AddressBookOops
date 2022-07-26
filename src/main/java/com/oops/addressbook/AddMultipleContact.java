@@ -3,6 +3,7 @@ package com.oops.addressbook;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddMultipleContact {
     static ArrayList<AddressBook> personList = new ArrayList<>();
@@ -40,13 +41,12 @@ public class AddMultipleContact {
         System.out.println("Enter zip: ");
         person.setZip(sc.nextLong());
 
-        boolean duplicate = AddMultipleContact.checkDuplicateName(person.getFirstName(),person.getLastName());
-        if (duplicate == false){
+        boolean duplicate = AddMultipleContact.checkDuplicateName(person.getFirstName(), person.getLastName());
+        if (duplicate == false) {
             personList.add(person);
             System.out.println("Person added");
             counter++;
-        }
-        else {
+        } else {
             System.out.println("Name already exist");
         }
     }
@@ -66,8 +66,7 @@ public class AddMultipleContact {
             if (personList.get(i).getFirstName().equals(firstName)) {
                 personList.remove(personList.get(i));
                 System.out.println("Contact removed successfully");
-            }
-            else
+            } else
                 System.out.println("Contact not found");
         }
     }
@@ -113,34 +112,53 @@ public class AddMultipleContact {
             }
         }
     }
+
     public static void addAddressBook() {
         Dictionary address = new Hashtable();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter name of address Book you want: ");
         AddressBook addressBookMain = new AddressBook();
         String bookName = scanner.nextLine();
-        address.put(bookName,addressBookMain);
-        System.out.println("Address Book " +bookName+ " has been created.");
+        address.put(bookName, addressBookMain);
+        System.out.println("Address Book " + bookName + " has been created.");
         choices();
     }
 
-    public static boolean checkDuplicateName(String firstName, String lastName){
+    public static boolean checkDuplicateName(String firstName, String lastName) {
         boolean duplicate = false;
-        for (int i=0; i<personList.size(); i++){
-            if (personList.get(i).getFirstName().equals(firstName) && personList.get(i).getLastName().equals(lastName)){
+        for (int i = 0; i < personList.size(); i++) {
+            if (personList.get(i).getFirstName().equals(firstName) && personList.get(i).getLastName().equals(lastName)) {
                 duplicate = true;
             }
         }
         return duplicate;
     }
 
+    public static void searchPersonByState(String state) {
+        System.out.println("\nEnter the state name to display details :- ");
+        ArrayList<AddressBook> list = (ArrayList<AddressBook>) personList.stream().filter(contactName -> contactName
+                .getState().equals((state))).collect(Collectors.toList());
+        for (AddressBook contact : list) {
+            System.out.println("First Name: " + contact.getFirstName() + "Last Name: " + contact.getLastName());
+        }
+    }
+
+    public static void searchPersonByCity(String city) {
+        ArrayList<AddressBook> list = (ArrayList<AddressBook>) personList.stream().filter(contactName -> contactName
+                .getCity().equals((city))).collect(Collectors.toList());
+        for (AddressBook contact : list) {
+            System.out.println("First Name: " + contact.getFirstName() + "Last Name: " + contact.getLastName());
+        }
+    }
+
     public static void choices() {
 
         int choice = 0;
-        while (choice<6) {
+        while (choice < 10) {
             /*System.out.println("Enter name of the address book you want to create");
             String name = sc.next();*/
-            System.out.println("Enter ur choice \n1.Add\n2.edit\n3.delete\n4.addNoOfContactsn\n5.display\n6.addAddressBook\n7.Exit");
+            System.out.println("Enter ur choice \n1.Add\n2.edit\n3.delete\n4.addNoOfContactsn\n5.display" +
+                    "\n6.display details by using state\n7.dispaly details by using city\n8.addAddressBook\n9.Exit");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -157,13 +175,23 @@ public class AddMultipleContact {
                     addMultipleContact();
                     break;
                 case 5:
+                    System.out.println("\nEnter the state name to display details :- ");
+                    String state = sc.next();
+                    searchPersonByState(state);
+                    break;
+                case 6:
+                    System.out.println("\nEnter the city name to display details :- ");
+                    String city = sc.next();
+                    searchPersonByCity(city);
+                    break;
+                case 7:
                     System.out.println("The entered person details display:");
                     System.out.println(personList.toString());
                     break;
-                case 6:
+                case 8:
                     addAddressBook();
                     break;
-                case 7:
+                case 9:
                     System.out.println("Enter correct option");
                     break;
                 default:
